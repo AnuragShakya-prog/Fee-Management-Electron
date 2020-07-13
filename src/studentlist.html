@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <!-- <script src="../assets/js/jquery-3.4.1.js"></script> -->
+
+    <title>List Of Students - AnuraG</title>
+</head>
+<body>
+    <div class="studentlist-topbar">   
+        
+        <div class="left-stdlist-bar">
+            <div class="total-students">
+                <div class="total-heading">
+                    Total Students
+                </div>
+                <div class="total-value" id='total-std-value'>
+                    500
+                </div>
+            </div>
+        </div>
+        
+        <div class="std-list-btn-container">        
+            <div class="filter-btn-container">
+                <button class="btn btn-outline-primary" id='filter-btn'>Filter</button>
+            </div>    
+            <div class="stdList-addFee-btn-container">
+                <button class="btn btn-outline-primary" id='stdListAddfee-btn'>Add-Fee</button>
+            </div>
+        </div>
+
+    </div>
+
+    <table class="table" style="margin-top: 6em;">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col"><input type="checkbox" name="selectAll" id="selectAllCheckbox" onchange="selectAll(this);"/></th>
+            <th scope="col">Student ID</th>
+            <th scope="col">StudentName</th>
+            <th scope="col">Father's Name</th>
+            <th scope="col">Mother's Name</th>
+            <th scope="col">DOB</th>
+            <th scope="col">Class</th>
+            <th scope="col">Mobile No.</th>
+            <th scope="col">Edit</th>
+          </tr>
+        </thead>
+        <tbody id='students-tbody'>
+          <tr class="student-inputrow">
+            <th scope="row">##</th>
+            <td><input type="number" name="studentId" class='form-control std-input' id="stdId" onkeyup="changeFocusAndValidate(event);"></td>
+            <td><input type="text" name="name" id="stdName" class='form-control std-input' onkeyup="changeFocusAndValidate(event);"></td>
+            <td><input type="text" name="fatherName" class='form-control std-input' id="stdFatherName" onkeyup="changeFocusAndValidate(event);"></td>
+            <td><input type="text" name="motherName" class='form-control std-input' id="stdMotherName" onkeyup="changeFocusAndValidate(event);"></td>
+            <td><input type="date" name="dob" class='form-control std-input' id="stdDate" min="2000-01-01" max="2050-01-01" onkeyup="changeFocusAndValidate(event);"></td>
+            <td><input type="number" name="stdClass" class='form-control std-input' id="stdClass" onkeyup="changeFocusAndValidate(event);"></td>
+            <td><input type="number" name="mobileNo" class='form-control std-input' id="stdMobileNo" onkeyup="changeFocusAndValidate(event);"></td>
+            <!-- <td><a class="btn btn-primary">Edit</a></td> -->
+        </tr>
+        </tbody>
+      </table>
+      
+      </table>
+
+      <!-- Insert this line above script imports  -->
+    <script>
+        if (typeof module === 'object'){
+            window.module = module; 
+            module = undefined;
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+
+    <script src="./js/studentlist.js"></script>
+
+    <script>
+
+            
+    let allFieldValidObj={}
+
+        let lastValidField;
+
+        function changeFocusAndValidate(event){
+            //VALIDATING value
+            
+            let typeOfInput=event.target.getAttribute("type")
+            let nameOfInput=event.target.getAttribute('name');
+            let isValidValue=true;
+            let inputValue=event.target.value;
+
+            if(typeOfInput=='text'){
+                isValidValue=validateName(inputValue);
+        
+            }else if(nameOfInput=='mobileNo'){
+                isValidValue=validateNumber(inputValue);
+            }   
+            
+            if(typeOfInput!="date"){
+                let value=inputValue;
+
+                value=value.replace(/\s+/g, ' ');
+                value=value.replace(/^\s+/g, '');
+                value=value.trim();
+                
+                event.target.value=value;
+
+            }
+            
+            inputValue=event.target.value;
+            
+            
+            if(isValidValue){
+                event.target.style.border='2px solid green';
+            }else{
+                event.target.style.border='2px solid red';
+            }
+
+            allFieldValidObj[nameOfInput]=[isValidValue,inputValue];
+            
+            console.log(allFieldValidObj);    
+        
+
+            if(event.keyCode==13){
+
+                // Focus handling
+                if(event.target.value.replace(/\s+/g,'')!=''){
+                    
+                    let inputsElem=document.getElementsByTagName("input");
+
+
+                    for(let element of Array.from(inputsElem)){
+
+                        if(element.value.replace(/\s+/g)==''){
+                            element.focus();
+                            break;
+                        }
+                    };
+
+                // Focus handling exit
+
+                    // Validating fields
+
+                    if (Object.keys(allFieldValidObj).length==7){
+                        
+                        lastValidField=true;
+                        
+
+                        for(let fieldname in allFieldValidObj){
+                        
+                            
+                            let [isValidField,fieldValue]=allFieldValidObj[fieldname];
+
+                            if(!isValidField){
+                                lastValidField=false;
+                            }
+                            // console.log(isValidField);
+                            // console.log(fieldname);
+                            // console.log(isItLastValidField);
+                        
+
+                        }
+                        console.log(lastValidField);
+
+
+                        if (lastValidField){
+                            
+                            let newStd=new Student();
+                            for(let fieldname in allFieldValidObj){
+
+                                let [is_valid,fieldValue]=allFieldValidObj[fieldname];
+
+
+                                if(is_valid){
+
+                                    newStd[fieldname]=fieldValue;
+                                    // console.log(allFieldValidObj);
+                                }
+                            } 
+
+                            clearAllInputFields();
+                            newStd.save();
+                            
+                            addStudentRow(newStd);
+                            allFieldValidObj={};
+                        }
+                }
+
+                }
+            }
+    }
+
+
+    function validateName(value){
+        
+        let is_valid=true;
+
+        if(value==''){
+            is_valid=true;
+        }
+        if(/\d/.test(value)){
+            is_valid=false;
+        }
+
+        if(value.length>=20){
+            is_valid=false;
+        }
+
+        if(/[`!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(value)){
+            is_valid=false;
+        }
+
+        return is_valid;
+    }
+
+    function validateNumber(value){
+        let isValid=true;
+
+        if(String(value).length!=10){
+            isValid=false;
+        }
+
+        return isValid;
+    }
+
+    function clearAllInputFields(){
+
+        let allInputFields=Array.from(document.getElementsByClassName("std-input"));
+        console.log('hey here');
+        console.log(allInputFields);
+        for(let inpField of allInputFields){
+            
+            inpField.value='';
+            // console.log(inpField);
+
+        }
+
+
+    }
+
+    function addStudentRow(studentObj){
+        
+        let tableBody=document.getElementById('students-tbody');
+
+        let studentHtml=`<tr class="student-row" id='row-${studentObj.secret_id}'>
+                                <th scope="row"><input type='checkbox' class="StudentSelectBox" onchange='onCheckboxChange(event);'></th>
+                                <td id="student_id-col">${studentObj.studentId}</td>
+                                <td id='name-col' class='stdName-col' onclick="onNameClick(event);">${studentObj.name}</td>
+                                <td id='fatherName-col'>${studentObj.fatherName}</td>
+                                <td id='motherName-col'>${studentObj.motherName}</td>
+                                <td id='dob-col'>${studentObj.dob}</td>
+                                <td id='stdClass-col'>${studentObj.stdClass}</td>
+                                <td id='mobileNo-col'>${studentObj.mobileNo}</td>
+                                <td><a class='btn btn-primary' id=${studentObj.secret_id} onclick='convertToInput(this.id);'>Edit</a></td>
+                        </tr>`;
+        
+        tableBody.innerHTML=studentHtml+tableBody.innerHTML;
+
+        // Increasing total students value by 1
+        increaseTotalStdValue("total-std-value");
+
+    }
+
+    function convertToInput(secret_id){
+
+        let stdObjRow=document.getElementById(`row-${secret_id}`);
+        console.log(secret_id);
+        console.log(stdObjRow);
+        let stdObj=getStdObj(secret_id);
+        console.log(stdObj);
+        
+        let stdRow=`<tr class="student-row" id="row-${secret_id}">
+            <th scope="row">#</th>
+            <td><input value=${stdObj.studentId} type="number" name="studentId" class='form-control std-input' id="stdId" ></td>
+            <td><input  value="${String(stdObj.name)}" type="text" name="name" id="stdName" class='form-control std-input'></td>
+            <td><input value="${String(stdObj.fatherName)}" type="text" name="fatherName" class='form-control std-input' id="stdFatherName"  ></td>
+            <td><input  value="${String(stdObj.motherName)}" type="text" name="motherName" class='form-control std-input' id="stdMotherName" ></td>
+            <td><input  value="${stdObj.dob}" type="date" name="dob" class='form-control std-input' id="stdDate" min="2000-01-01" max="2050-01-01" ></td>
+            <td><input  value=${stdObj.stdClass} type="number" name="stdClass" class='form-control std-input' id="stdClass" ></td>
+            <td><input  value=${stdObj.mobileNo} type="number" name="mobileNo" class='form-control std-input' id="stdMobileNo" ></td>
+            <td><a class="btn btn-primary" id="updateBtn-${secret_id}" onclick='updateStdObj(this.id);'>Update</a></td>
+        </tr>`;
+        console.log(stdRow);
+         
+        stdObjRow.innerHTML=stdRow;
+
+    }
+    function updateStdObj(updateBtnId){
+
+        let stdObjId=updateBtnId.split('-')[1];
+
+        let allValid=true;
+        let updatedStdObj=new Student();
+
+        document.querySelectorAll(`#row-${stdObjId} td input`).forEach((elem)=>{
+            let elemValue=elem.value;
+            let elemType=elem.getAttribute('type');
+            let elemName=elem.getAttribute('name');
+            let is_valid=true;
+
+            if (elemType=='text'){
+               
+                elemValue=elemValue.replace(/^\s+/g,'')
+                elemValue=elemValue.replace(/$\s+/g,'')
+                elem.value=elemValue;
+                is_valid=validateName(elemValue);
+
+            }else if((elemName=='mobileNo')){
+                is_valid=validateNumber(elemValue);
+            }else if(elemValue==''){
+                is_valid=false;
+            }
+
+            if(!is_valid){
+                allValid=false;
+                elem.style.border='2px solid red';
+            }else{
+                elem.style.border='';
+                updatedStdObj[elemName]=elemValue;
+            }
+            
+        });
+
+        if(allValid){
+            updatedStdObj.secret_id=stdObjId;
+            let updated=updatedStdObj.update(stdObjId);
+            
+            if(updated){
+                let updatedObjHtml=`
+                                    <th scope="row"><input type="checkbox" class="StudentSelectBox"  onchange='onCheckboxChange(event);'/></th>
+                                    <td id="student_id-col">${updatedStdObj.studentId}</td>
+                                    <td id='name-col' class='stdName-col' onclick="onNameClick(event);">${updatedStdObj.name}</td>
+                                    <td id='fatherName-col'>${updatedStdObj.fatherName}</td>
+                                    <td id='motherName-col'>${updatedStdObj.motherName}</td>
+                                    <td id='dob-col'>${updatedStdObj.dob}</td>
+                                    <td id='stdClass-col'>${updatedStdObj.stdClass}</td>
+                                    <td id='mobileNo-col'>${updatedStdObj.mobileNo}</td>
+                                    <td><a class='btn btn-primary' id=${updatedStdObj.secret_id}  onclick='convertToInput(this.id);'>Edit</a></td>
+                                `
+                let rowId=`row-${stdObjId}`;
+                let newRowId=`row-${updatedStdObj.secret_id}`;
+                let rowToUpdate=document.getElementById(rowId);
+
+                rowToUpdate.innerHTML=updatedObjHtml;
+
+                rowToUpdate.id=newRowId;
+            }
+        }else{
+            updatedStdObj=new Student();
+        }
+        
+    }
+
+</script>
+
+
+<script>
+    // Jquery
+    // $("#name-col").on('click',(event)=>{
+        
+   
+
+    // })
+
+
+    // $("#name-col").on("click",(event)=>{
+    
+    //     let clickedRow=$(event.target).closest('tr')[0];
+    //     let stdObjId=clickedRow.id.split("-")[1];
+    //     let stdObjToShow=getStdObj(stdObjId);
+    //     let stdObjJson=JSON.stringify(stdObjToShow);
+
+    //     console.log(clickedRow);
+    //     console.log(clickedRow.id);
+
+    //     localStorage.setItem("stdObjToShow",stdObjJson);
+        
+    //     goToFeeVoucherList();
+   
+    // })
+    
+    function selectAll(target){
+        let allCheckboxes=Array.from($(".StudentSelectBox"));
+        
+        for(let checkbox of allCheckboxes){
+            
+            if(target.checked==false){
+                checkbox.checked=false;
+            }
+            else{
+                checkbox.checked=true;
+            }
+            checkbox.onchange(checkbox);
+        }
+    }
+
+    $(".stdName-col").on("click",(event)=>{
+        console.log(event);
+    });
+    function onNameClick(event){
+        
+        let clickedRow=$(event.target).closest('tr')[0];
+        let stdObjId=clickedRow.id.split("-")[1];
+        let stdObjToShow=getStdObj(stdObjId);
+        let stdObjJson=JSON.stringify(stdObjToShow);
+
+        console.log(clickedRow);
+        console.log(clickedRow.id);
+
+        localStorage.setItem("stdObjToShow",stdObjJson);
+        
+        goToFeeVoucherList();
+    }
+
+    $("#filter-btn").on("click",(event)=>{
+        createFilterWindow("src/filterStudentsWin.html");
+    })
+
+
+    $("#stdListAddfee-btn").on('click',event=>{
+        createStdAddFeeWin("./src/stdAddFee.html");
+    })
+    
+
+
+    // functions for selectings
+    localStorage.setItem("selectedStdIds","[]");
+
+    const onCheckboxChange=(event)=>{
+        
+        let checkbox;
+        try{
+            checkbox=event.target;
+            if(checkbox==undefined){
+                throw new Error("This event is a target");
+            }
+        }
+        catch(err){
+            console.log(err);
+            checkbox=event;
+        }
+        let selectedStdIds=[];
+
+        try{
+            selectedStdIds=localStorage.getItem("selectedStdIds");
+            
+            if(selectedStdIds==null){
+                selectedStdIds=[];
+            }else{
+                selectedStdIds=JSON.parse(selectedStdIds);
+            }
+        }
+        catch(err){
+            console.log(err);
+            selectedStdIds=[];
+
+        }
+
+        console.log(checkbox);
+        let checkedStdId=$(checkbox).closest("tr")[0].id.split("-")[1];
+
+        if(checkbox.checked){
+
+            selectedStdIds.push(checkedStdId);
+        }
+        else{
+            let stdIdIndex=selectedStdIds.indexOf(checkedStdId);
+            
+            if(stdIdIndex!=-1){
+                console.log(stdIdIndex);
+                selectedStdIds.splice(stdIdIndex,1);
+            }
+        
+        }
+
+        console.log(selectedStdIds);
+        localStorage.setItem("selectedStdIds",JSON.stringify(selectedStdIds));
+
+    }
+
+
+
+
+  
+</script>
+<script>if (window.module){
+    module = window.module;
+}</script>
+
+</body>
+</html>

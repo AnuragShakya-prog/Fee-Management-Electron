@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add-Fee - anuraG</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <!-- <script src="../assets/js/jquery-3.4.1.js"></script> -->
+</head>
+<body>
+
+    <div class="stdAddFee-topbar">
+        Increase Student Fees
+    </div>
+
+    <div class="addFeeInputTable-Container">
+        <table class='table'>
+            <thead id='stdAddFeeThead'>
+                <tr>
+                    <th>#</th>
+                    <th>Fee Type</th>
+                    <th>Fees</th>
+                </tr>
+            </thead>
+            <tbody id="stdAddFeeInputTbody">
+               
+            </tbody>
+        </table>
+    </div>
+
+    <div class="stdAddFee-btn">
+        <button class="btn btn-outline-primary" id='stdAddFee-submitBtn'>Add Fee</button>
+    </div>
+    
+    
+
+    <script>
+        if (typeof module === 'object'){
+            window.module = module; 
+            module = undefined;
+        }
+    </script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="./js/stdAddFee.js"></script>
+
+    <script >
+        $(".stdAddFeeInput").keyup((event)=>{
+            // totalFee();
+            console.log(totalFee());
+            $("#total-fee").html(totalFee());
+        });
+
+
+        function totalFee(){
+
+            let allFeeInputs=document.getElementsByClassName('stdAddFeeInput');
+            let total=0;
+            for(let feeInput of allFeeInputs){
+                if(feeInput.value!=''){
+                    // console.log
+                    total+=Number(feeInput.value);
+                }
+            }
+            
+            return total;
+        }
+
+    </script>
+    
+    
+    <script>if (window.module){
+        module = window.module;
+    }</script>
+
+</body>
+</html>

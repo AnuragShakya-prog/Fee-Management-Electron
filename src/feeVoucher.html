@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Fee Information - AnuraG</title>
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+</head>
+<body>
+    <div class="main-fee-wrapper">
+
+       
+        <div class="school-section">
+            <div class="school-fee-heading">
+                A.S.K Public School
+            </div>
+            <div class="school-address">
+                Durga park gali no.2
+            </div>
+        </div>
+        
+        <div class="date-info">
+            <div class="date-heading">
+                Date-
+            </div>
+            <div class="date-value">
+                02/02/2020
+            </div>
+        </div>
+        <div class="names-info-wrapper">
+            <div class="stdInfo-Wraper">
+                <div class="std-fee-heading">
+                    Name-
+                </div>
+                
+                <div class="std-info-value" id='stdName'>
+                   Anurag
+                </div>
+            </div>
+            <div class="stdInfo-Wraper">
+                <div class="std-fee-heading">
+                    Father's Name-
+                </div>
+                <div class="std-info-value" id="stdFatherName">
+                    Chandra Prakash
+                </div>
+            </div>
+
+        </div>
+        <button class="btn btn-outline-primary" id='backBtn' >Back</button>
+
+        <div class="from-to-months">
+            <div class="from-container">
+                From
+                <select name="fromMonth" id="fromMonth" class="form-control">
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                    <option value="july">July</option>
+                    <option value="august">August</option>
+                    <option value="september">September</option>
+                    <option value="october">October</option>
+                    <option value="november">November</option>
+                    <option value="december">December</option>
+                </select>
+            </div>
+            <div class="to-container">
+                To
+                <select name="toMonth" id="toMonth" class="form-control">
+                    <option value="january">January</option>
+                    <option value="february">February</option>
+                    <option value="march">March</option>
+                    <option value="april">April</option>
+                    <option value="may">May</option>
+                    <option value="june">June</option>
+                    <option value="july">July</option>
+                    <option value="august">August</option>
+                    <option value="september">September</option>
+                    <option value="october">October</option>
+                    <option value="november">November</option>
+                    <option value="december">December</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="fee-table-container">
+    
+            <table class="table table-dark table-bordered fee-table">
+                <thead>
+                    <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Particulars</th>
+                    <th scope="col">Amount</th>
+                    <!-- <th scope="col">Handle</th> -->
+                    </tr>
+                </thead>
+                <tbody id="fee-body">
+                   
+                </tbody>
+            </table>
+
+        </div>
+
+        <div class="save">
+            <button class="btn btn-primary" onclick="addFeeToJson();">Save</button>
+        </div>
+
+    </div>
+
+    
+
+    <script>
+        if (typeof module === 'object'){
+            window.module = module; 
+            module = undefined;
+        }
+    </script>
+    <script src="../assets/js/jquery-3.4.1.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <script src="./js/feeVoucher.js"></script>
+    <script>if (window.module){
+         module = window.module;
+    }</script>
+
+    <script>
+
+        $(".fee-input").keyup((event)=>{
+            // totalFee();
+
+            $("#total-fee").html(totalFee());
+        });
+
+
+        function totalFee(){
+
+            let allFeeInputs=document.getElementsByClassName('fee-input');
+            let total=0;
+            for(let feeInput of allFeeInputs){
+                if(feeInput.value!=''){
+                    // console.log
+                    total+=Number(feeInput.value);
+                }
+            }
+            
+            return total;
+        }
+
+
+        function setStdInfo(){
+
+            let stdObj=getStdObj();
+
+            let stdNameElem=document.getElementById('stdName');
+            let stdFatherNameElem=document.getElementById('stdFatherName');
+        
+            stdNameElem.innerText=stdObj.name;
+            stdFatherNameElem.innerText=stdObj.fatherName;
+
+            let dateValueElem=$(".date-value")[0];
+
+            let todayDate=new Date();
+            let months=['January','February','March','April','May','June','July','August','September','October','November','December']
+            
+            let todaysDay=todayDate.getDate();
+            let currentMonth=todayDate.getMonth();
+            let currentYear=todayDate.getFullYear();
+
+            let formattedDate=`${todaysDay},${months[currentMonth]} ${currentYear}`;
+
+            dateValueElem.innerHTML=formattedDate;
+
+        }
+
+
+
+
+        setStdInfo();
+
+        
+
+        // Handling backBtn
+
+        $("#backBtn").on("click",goToFeeVoucherList);
+    </script>
+</body>
+</html>

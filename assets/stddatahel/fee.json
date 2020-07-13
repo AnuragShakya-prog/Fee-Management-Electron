@@ -1,0 +1,14 @@
+{
+    "VSPDS_odfpf_1":{
+        
+        "02/01/2018":{
+                "fee_date":"02/01/2018",
+                "fees":[{"type":"Computer","paid":100},{"type":"Tuition","paid":"900"}],
+                "from_month":"January",
+                "to_month":"March",
+                "totalPaid":900
+            }
+            
+    }
+    
+}

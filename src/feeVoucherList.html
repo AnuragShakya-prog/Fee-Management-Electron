@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../assets/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/main.css">
+    <title>All Fee's List - AnuraG</title>
+</head>
+<body>
+
+  <div class="info-bar">
+    <div class="leftbar-info">
+      <div class="name-info">
+          <div class="name-heading heading">
+            Name -
+          </div>
+          <div class="value" id='name-value'>
+            Anurag
+          </div>
+      </div>
+      <div class="fatherName-info">
+        <div class="fatherName-heading heading">
+          Father's Name -
+        </div>
+        <div id="fatherName-value"class="value">
+          Chandra Prakash
+        </div>
+      </div>
+    </div>
+    <div class="btn-container">
+      <div class="addFee">
+        <button class="btn btn-outline-primary" id='addFeeBtn'>Add</button>
+      </div>
+      <div class="back-btn">
+        <button class="btn btn-outline-primary" id='backBtn' >Back</button>
+      </div>
+      <div class="setFee-btn">
+        <button class="btn btn-outline-primary" id='setFeeBtn' >SetFee</button>
+      </div>
+    
+      <div class="showFee-btn">
+        <button type="button" class="btn btn-primary" id="showFeeBtn" data-toggle="modal" data-target="#allFeeModal">
+          ShowFee
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <div class="paid-info">
+    <div class="remainingFee">
+      <div class="remainingFeeHeading">
+        Remaining Fee(₹
+      </div>
+      <div id="remainingFeeValue">
+        300
+      </div>
+       )
+    </div>
+    
+    <div class="totalPaidValue-container">
+      <div class="totalPaidValue-heading">
+        Total Paid ( ₹
+      </div>
+      <div id="totalPaid-Value">
+        0
+      </div>
+      )
+    </div>
+  </div>
+
+    <div class="feeListTable">
+          <table class="table">
+            <thead class="thead-light">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">FeeDate</th>
+                <th scope="col">TotalPaidFees</th>
+              </tr>
+            </thead>
+            <tbody id="feeListBody">
+        
+            </tbody>
+          </table>
+    </div>
+    
+    <!--Show total fee Modal -->
+    <div class="modal fade" id="allFeeModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Student Fees</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <table class='table'>
+                <thead>
+                  <th>#</th>
+                  <th>FeeType</th>
+                  <th>Fees</th>
+                </thead>
+                <tbody id='allFees'>
+               
+                </tbody>
+            </table>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+    <script>
+        if (typeof module === 'object'){
+            window.module = module; 
+            module = undefined;
+        }
+    </script>
+    <script src="../assets/js/jquery-3.4.1.js"></script>
+    <script src="../assets/bootstrap/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+
+    <script src="./js/feeVoucherList.js"></script>
+    <script>if (window.module){
+         module = window.module;
+    }</script>
+
+    <script>
+      document.getElementById('addFeeBtn').addEventListener("click",goToAddFee);
+
+      // Setting info-bar std name
+      document.getElementById('name-value').innerText=currentStd.name; 
+      document.getElementById('fatherName-value').innerText=currentStd.fatherName; 
+
+
+      // Handling clicking on row of fee
+      $(".fee-row").on('click',(event)=>{
+
+        let feeId=$(event.target).closest("tr")[0].id;
+        let clickedFee=getFeeById(feeId,stdFeeData);
+        
+        // Setting fee in localstorage 
+        localStorage.setItem('fee',JSON.stringify(clickedFee));
+
+        // Loading fee view
+        loadFeeView();
+
+      })
+
+      
+      // Handling backBtn
+
+      $("#backBtn").on("click",goToStudentList);
+      $("#setFeeBtn").on("click",(event)=>{
+        createSetFeeWindow();
+      });
+    </script>
+</body>
+</html>

@@ -1,0 +1,604 @@
+/* @import url('https://fonts.googleapis.com/css?family=Roboto+Condensed&display=swap'); */
+
+@font-face {
+    font-family: Roboto;
+    src: url(../fonts/RobotoCondensed-Regular.ttf);
+}
+
+*{
+    font-family:Roboto;
+}
+
+thead th{
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.form-container{
+    display: flex;
+    justify-content: center;
+    max-width: 53%;
+    vertical-align: middle;
+    align-items: center;
+    height: 84vh;
+}
+
+/* Login form width */
+.form-container div{
+    width: 100%;
+}
+
+form{
+    width: 100%;
+}
+
+.image-container img{
+    width: 100%;
+    height: 64vh;
+}
+
+#overlay{
+    width: 100%;
+    height: 57vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    /* background-color: rgba(53, 49, 49, 0.794); */
+    background-color: rgba(76, 81, 82, 0.794);
+}
+
+.school-heading{
+    color: white;
+    font-size: 3em;
+    display: flex;
+    flex-direction: column;
+    padding: 2em 2em 0.3em 2em;
+
+    font-family: 'Roboto Condensed', sans-serif;
+
+}
+
+.more-info-text{
+    font-size: 0.4em;
+    font-size: 0.3em;
+    padding-right: 316px;
+}
+
+.work-btn{
+    padding: 0em 0em 0em 6em;
+}
+
+.work-btn button{
+    background-color: #56bbb0;
+    border: none;
+}
+
+.card{
+    border: none;
+}
+
+.card-body{
+    padding: 0.2em;
+}
+
+.main-fee-wrapper{
+    margin-top:1em;
+}
+
+.school-fee-heading{
+    text-align: center;
+    font-size: 2.2em;
+    color: #31BBF5;
+}
+
+.school-address{
+    text-align: center;
+    color: black;
+    font-size: 0.8em;
+    font-weight: 504;
+}
+
+.names-info-wrapper{
+    /* position: relative; */
+    position: absolute;
+    top: 1.4em;
+    font-size: 1.2em;
+    /* right: 16px; */
+    left: 13px;
+}
+
+.stdInfo-Wraper{
+    display: flex;
+    font-weight: 500
+    ;
+}
+
+.std-fee-heading{
+    color: #31BBF5;
+    font-weight: 600;
+}
+
+.std-info-value{
+    padding-left: 0.5em;
+    font-size: 0.8em;
+    padding-top: 0.3em;
+    font-weight: 505;
+}
+
+.fee-table{
+    color: #31BBF5;
+}
+
+.fee-table-container{
+    margin: 0em 0.5em;
+}
+
+.from-container{
+    padding-bottom: .8em;
+}
+
+.from-to-months{
+    padding: 0.5em;
+    display: flex;
+}
+
+
+
+
+.fee-input{
+    max-width: 100px;
+    font-weight: 500;
+}
+
+#backBtn{
+    margin: 1em 1em 0em 0.5em;
+}
+
+#name-col{
+    cursor: pointer;
+}
+
+#name-col:hover{
+    background-color: #a7a0a054;
+    color: black;
+
+}
+
+.date-info{
+    position: absolute;
+    /* right: 10; */
+    top: 7em;
+    /* left: -10; */
+    right: 37px;
+
+    display: flex;
+}
+
+.date-heading{
+    color: #31BBF5;
+    font-weight: 500;
+    font-size: 1.4em;
+}
+
+.date-value{
+    padding: 0.4em;
+    font-weight: 500;
+}
+
+.save{
+    padding:0.5em;
+}
+
+.addFee{
+    display: flex;
+    justify-content: flex-end;
+}
+.addFee .btn{
+    color: white;
+    background: #00adff;
+    border: none;
+    margin-left: 0.3em;
+    margin-bottom: 0.2em;
+    border:2px solid white;
+}
+
+#stdListAddfee-btn{
+    color: white;
+    background: #00adff;
+    border: none;
+    margin-left: 0.3em;
+    margin-bottom: 0.2em;
+    border:2px solid white;
+}
+
+.std-list-btn-container{
+    padding:0.8em;
+}
+
+.btn-container{
+    display: flex;
+}
+
+
+
+.form-control{
+    border: 1px solid #1c9ad0;
+}
+
+.from-to-months{
+    font-weight: bold;
+}
+.to-container{
+    margin-left: 1em;
+}
+
+.save{
+    font-size: 1.2em;
+}
+
+.info-bar{
+    display: flex;
+    padding:0.6em;
+    background-color:rgb(41, 173, 230);
+    font-size: 1.3em;
+    font-weight: 500 ;
+    font-family: 'Roboto Condensed';
+    color: white;
+    justify-content: space-between;
+    margin-bottom: 1em;
+}
+
+
+.name-info{
+    display: flex;
+    padding: 0.2em;
+    border-radius: 0.4em;
+}
+
+.fatherName-info{
+    display: flex;
+    padding: 0.2em;
+    border-radius: 0.4em;
+}
+
+.value{
+    margin: 0 0.6em;
+}
+
+
+.feeListTable{
+    font-family: 'Roboto Condensed';
+}
+
+.leftbar-info{
+    display: flex;
+}
+
+.heading{
+    color: black;
+}
+/* backbtn styling */
+.back-btn{
+    margin-left: 0.3em;
+}
+
+.back-btn #backBtn{
+    color: white;
+    border: 2px solid white;
+    margin: 0em 0.3em;
+}
+
+#from_month_value{
+    color: red;
+    border: 2px solid;
+    padding: 0.1em;
+    border-radius: 0.2em;
+    border: none;
+    border-bottom: 2px solid;
+}
+
+/* Fee date */
+.feeDate-info{
+    position: absolute;
+    /* left: 51px; */
+    font-size: 1.3em;
+    right: 41px;
+    color: #2caec3;
+    display: flex;
+}
+
+.feeDate-value{
+    padding-left: 0.4em;
+    color: black;
+}
+
+.filter-btn-container{
+    display: flex;
+    /* justify-content: end; */
+    justify-content: flex-end;
+    
+    padding: 0.8em;
+}
+.top-filter-bar{
+    /* height: 10vh; */
+    background: #28baea;
+    text-align: center;
+    -webkit-app-region: drag;
+    font-size: 1.4em;
+    padding: 0.3em;
+    color: white;
+}
+.filter-form{
+    padding: 0.8em;
+    color: #2297bd;
+}
+
+#filterBtn{
+    background: #00a1ff;
+    color: white;
+    border: none;
+    font-size: 1.1em;
+}
+
+#filter-btn{
+    color: white;
+    /* border: white; */
+    border: 2px solid white;
+    margin-bottom: 0.2em;
+}
+
+.studentlist-topbar{
+    display: flex;
+    background: #01a1ff;
+    justify-content: space-between;
+    vertical-align: middle;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    top: 0;
+}
+
+
+.left-std-list-bar{
+    display: flex;
+    padding-left: 1em;
+    color: white;
+}
+
+.total-students{
+    margin-left: 1em;
+    display: flex;
+    color: white;
+    font-size: 1.1em;
+    align-content: center;
+    border: 2px solid white;
+    border-radius: 2em;
+    padding: 0.3em;
+}
+
+.total-heading{
+    font-size: 1.2em;
+    padding-left: 0.6em;
+}
+
+
+.total-value{
+    padding: 0em 1em;
+}
+
+
+.setFee-input{
+    max-width: 50%;
+}
+
+.setFee-thead{
+    color: white;
+    background: #00adff;
+
+    -webkit-app-region:drag;
+
+}
+
+#setFee-btn{
+    color: white;
+    background: #00adff;
+    border: none;
+    margin-left: 0.3em;
+    margin-bottom: 0.2em;
+
+}
+
+
+#setFeeBtn{
+    color:white;
+    border:2px solid white;
+}
+
+#showFeeBtn{
+    color: white;
+    background: #00adff;
+    border: none;
+    margin-left: 0.3em;
+    margin-bottom: 0.2em;
+    border:2px solid white;
+
+}
+
+#remainingFeeValue{
+    padding-left: 0.6em;
+}
+
+.paid-info{
+    display: flex;
+    font-size: 1.5em;
+    /* background: blue; */
+    background: rgb(41, 173, 230);
+    color: white;
+    padding: 0.2em;
+}
+
+.remainingFee{
+    display: flex;
+}
+
+.totalPaidValue-container{
+    display: flex;
+    margin-left: 1em;
+}
+
+.std-list-btn-container{
+    display: flex;
+}
+
+.stdAddFee-topbar{
+    background: #28baea;
+    text-align: center;
+    -webkit-app-region: drag;
+    font-size: 1.4em;
+    padding: 0.3em;
+    color: white
+}
+
+#stdAddFee-submitBtn{
+    margin: 0.2em;
+    background: #28baea;
+    color:white;
+    border:2px solid white;
+    /* border: none; */
+}
+
+
+.homepage-topbar{
+    display: flex;
+    justify-content: center;
+    background: black;
+}
+
+
+.myname-heading{
+    padding: 0.2em;
+    color: white;
+    font-size: 1.8em;
+    
+}
+
+.hero-section{
+    position: relative;
+    background-image:url("../images/hero-section.jpg");
+    background-size: cover;
+    height: 90vh;
+    background-position: center;    
+    margin: 10px;  
+    display: flex;
+    font-size: 3em;
+    color: white;
+    text-align: center;
+    /* vertical-align: middle; */
+    align-items: center;
+    justify-content: center;
+
+    flex-direction: column;
+}
+
+.hero-section-overlay{
+    position: absolute;
+    background: #2d2d2db5;
+    top: 0;
+    height: 100%;
+    width: 100%;
+
+}
+
+
+.school-name-heading{
+    z-index: 1;
+
+}
+
+.openBtn-container{
+    z-index: 2;
+}
+
+.openBtn-container .btn{
+    color: white;
+    z-index: 3;
+    border: 2px solid;
+
+}
+
+.school-images-section{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-top: 3em;
+}
+
+.school-images-heading{
+    font-size: 2em;
+    text-align: center;
+}
+
+.school-images{
+   display:grid;
+   height: 90vh;
+   width: 100%;
+   margin: 10px;
+   grid-template-columns: 33% 33% 33%;
+   grid-template-rows:50% 50%;
+}
+
+
+.school-image{
+    padding:0.3em;
+}
+
+.school-image img{
+    width: 100%;
+    height: 100%;
+}
+
+.school-images:first{
+    grid-column-start: 1;
+    grid-column-end: 3;
+    grid-row-start: 1;
+    grid-row-end: 3;
+}
+
+.big-sc-image{
+    
+    grid-column-start: 1;
+    grid-column-end: 3;
+
+}
+
+.info-bar{
+    position: absolute;
+    width: 100%;
+    top: 0;
+}
+.paid-info{
+    margin-top: 3em;
+    position: absolute;
+    top: 0;
+    width: 100%;
+}
+
+.feeListTable{
+    margin-top: 7em;
+}
+
+.mobileNo-info{
+    position: absolute;
+    top: 26px;
+    right: 60px;
+    font-size: 1.2em;
+    font-weight: bold;
+    display: flex;
+}
+
+.mobileNo-heading{
+    color: red;
+    /* padding-left: 5em; */
+    /* margin-left: 1em; */
+    margin-right: 0.7em;
+}
